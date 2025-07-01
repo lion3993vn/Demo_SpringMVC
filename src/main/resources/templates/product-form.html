@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create | Update product</title>
+</head>
+<body>
+  <h1>Create | Update product</h1>
+
+  <div>
+      <label for="name">Product Name</label>
+      <input type="text" th:value="${product.getName()}" name="name" placeholder="Product Name" id="name" />
+      <br>
+      <label for="price">Product Price</label>
+      <input type="text" th:value="${product.getPrice()}" name="price" placeholder="Product Price" id="price" />
+
+  </div>
+</body>
+</html>
