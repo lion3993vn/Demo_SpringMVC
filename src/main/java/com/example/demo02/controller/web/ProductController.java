@@ -1,12 +1,10 @@
 package com.example.demo02.controller.web;
 
+import com.example.demo02.entity.Category;
 import com.example.demo02.entity.Product;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,19 @@ import java.util.List;
 @Controller
 @RequestMapping("/products")
 public class ProductController {
+
+    public List<Category> getCategories() {
+        // add some sample categories using List of Category
+        List<Category> categories = new ArrayList<>();
+        categories.add(new Category(100L,"cate 1", "Category 1"));
+        categories.add(new Category(200L, "cate 2", "Category 2"));
+        categories.add(new Category(300L,"cate 3", "Category 3"));
+        categories.add(new Category(400L, "cate 4", "Category 4"));
+        categories.add(new Category(500L, "cate 5", "Category 5"));
+
+        return categories;
+
+    }
 
     @GetMapping
     public String list(Model model) {
@@ -48,6 +59,17 @@ public class ProductController {
         } else {
             model.addAttribute("product", new Product(id, "Product " + id, Double.parseDouble(id) * 10.0));
         }
+
+        model.addAttribute("categories", getCategories());
+
         return "product-form";
+    }
+
+    @PostMapping("/edit")
+    public String save(@ModelAttribute Product product, Model model) {
+        model.addAttribute("pname", product.getName() + " đã thay đổi!");
+        model.addAttribute("msg", "Product saved successfully!");
+
+        return "result";
     }
 }

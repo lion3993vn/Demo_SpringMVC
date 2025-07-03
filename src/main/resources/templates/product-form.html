@@ -7,13 +7,20 @@
 <body>
   <h1>Create | Update product</h1>
 
-  <div>
+  <form th:action="@{/products/edit}" th:object="${product}" method="post">
       <label for="name">Product Name</label>
       <input type="text" th:value="${product.getName()}" name="name" placeholder="Product Name" id="name" />
       <br>
       <label for="price">Product Price</label>
       <input type="text" th:value="${product.getPrice()}" name="price" placeholder="Product Price" id="price" />
+      <br>
+      <label for="cate">Category</label>
+      <select id="cate" name="cate">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+      </select>
+      <br>
 
-  </div>
+      <button type="submit">SAVE</button>
+  </form>
 </body>
 </html>
